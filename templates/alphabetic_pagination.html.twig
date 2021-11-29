@@ -1,0 +1,12 @@
+{% set alpha = app.request.query.get('alpha') %}
+<div class="navigation text-center mt-4">
+    {% for letter in 'a'|upper..'z'|upper %}
+        {% if alpha == letter %}
+            <a> {{ letter }}</a>
+        {% else %}
+            <a href="{{ path('main', {'alpha': letter }) }}"> {{ letter }}</a>
+        {% endif %}
+    {% endfor %}
+    <span class="ml-2">{{ ' | ' }}</span>
+    <span class="mr-2"><a href="{{ path('main') }}" class="text-warning"> {{ 'All' }}</a></span>
+</div>

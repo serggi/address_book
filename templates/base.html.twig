@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Address Book{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/project.min.css') }}" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+    {% block header %}
+        {{ include('header.html.twig') }}
+    {% endblock %}
+    <div class="container-fluid">
+        {{ include('flash_message.html.twig', {flashes: app.flashes}) }}
+    </div>
+    <main class="main" role="main">
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+    </main>
+    <footer class="text-muted mt-5">
+        <div class="container">
+            <p class="float-right">
+                <a href="#">Back to top</a>
+            </p>
+        </div>
+    </footer>
+    {% block javascripts %}{% endblock %}
+    </body>
+</html>

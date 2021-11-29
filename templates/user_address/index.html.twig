@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('alphabetic_pagination.html.twig') }}
+    {% if users is empty %}
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1>{{ 'Address book is empty' }}</h1>
+            </div>
+        </section>
+    {% endif %}
+    <div class="row">
+        {% for user in users %}
+            <div class="col-md-4 mt-auto">
+                <article class="mt-4">
+                    <header class="card-header">
+                        <div class="w-25">
+                            <h6 class="card-subtitle mb-auto">
+                                {% if user.picture is null %}
+                                    <img class="img-thumbnail" src="{{ asset('uploads/default_avatar.png') }}" alt="">
+                                {% else %}
+                                    <img class="img-thumbnail"
+                                         src="{{ asset('uploads/img/' ~ user.picture) }}"
+                                         alt=""
+                                    >
+                                {% endif %}
+                            </h6>
+                        </div>
+                        <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+                    </header>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{ 'Street:' }} {{ user.address.street ~ ', ' ~ user.address.number }}
+                        </p>
+                        <p class="card-text">
+                            {{ 'Country:' }} {{ user.address.country |country_name }}
+                        </p>
+                        <p class="card-text">
+                            {{ 'City:' }} {{ user.address.city }}
+                        </p>
+                        <p class="card-text">
+                            {{ 'Zip:' }} {{ user.address.zip }}
+                        </p>
+                        <p class="card-text">
+                            {{ 'Phone:' }} {{ user.phoneNumber }}
+                        </p>
+                        <p class="card-text">
+                            {{ 'Email:' }} {{ user.email }}
+                        </p>
+                        <p class="card-text">
+                            {{ 'Birthday:' }} {{ user.birthday|date('Y-m-d') }}
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-success" href="{{ path('edit',{'id':user.id}) }}">{{ 'Edit' }}</a>
+                        <a class="btn btn-danger" href="{{ path('delete',{'id':user.id}) }}">{{ 'Delete' }}</a>
+                    </div>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="navigation text-center mt-4">
+        {{ knp_pagination_render(users) }}
+    </div>
+{% endblock %}

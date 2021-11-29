@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mt-4">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            {{ form_row(form.firstname) }}
+            {{ form_row(form.lastname) }}
+            {{ form_row(form.phoneNumber) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.birthday) }}
+            {{ form_row(form.uploadedFile) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.address) }}
+        </div>
+        {{ form_row(form.save) }}
+        <p class="ml-auto"><a href="{{ path('main') }}" class="btn btn-secondary">Back</a></p>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
